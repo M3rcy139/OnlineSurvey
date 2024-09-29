@@ -1,5 +1,4 @@
 ﻿
-
 namespace OnlineSurvey.Persistence.Entities
 {
     public class SurveyEntity

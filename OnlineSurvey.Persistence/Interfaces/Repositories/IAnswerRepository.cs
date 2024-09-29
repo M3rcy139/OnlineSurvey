@@ -1,6 +1,5 @@
-﻿using OnlineSurvey.Core.Models;
-
-namespace OnlineSurvey.Application.Interfaces.Repositories
+﻿
+namespace OnlineSurvey.Persistence.Interfaces.Repositories
 {
     public interface IAnswerRepository
     {

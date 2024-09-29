@@ -12,7 +12,7 @@ using OnlineSurvey.Persistence;
 namespace OnlineSurvey.Persistence.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    [Migration("20240929114831_initial")]
+    [Migration("20240929204540_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -33,8 +33,8 @@ namespace OnlineSurvey.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -74,12 +74,11 @@ namespace OnlineSurvey.Persistence.Migrations
 
             modelBuilder.Entity("OnlineSurvey.Persistence.Entities.QuestionEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Order")
                         .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("SurveyId")
                         .HasColumnType("uuid");
@@ -107,8 +106,8 @@ namespace OnlineSurvey.Persistence.Migrations
                     b.Property<Guid>("InterviewId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

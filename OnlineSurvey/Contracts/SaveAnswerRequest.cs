@@ -3,7 +3,7 @@
     public record SaveAnswerRequest
     (
         Guid InterviewId,
-        Guid QuestionId,
+        int QuestionId,
         int AnswerId
     );
 }

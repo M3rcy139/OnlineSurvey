@@ -1,5 +1,4 @@
 ﻿
-
 namespace OnlineSurvey.Core.Models
 {
     public class Interview

@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OnlineSurvey.Application\OnlineSurvey.Application.csproj" />
     <ProjectReference Include="..\OnlineSurvey.Core\OnlineSurvey.Core.csproj" />
   </ItemGroup>
 

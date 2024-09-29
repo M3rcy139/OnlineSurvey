@@ -3,7 +3,7 @@ namespace OnlineSurvey.Contracts
 {
     public record GetQuestionResponse
     (
-        Guid Id,
+        int Id,
         string Text,
         IEnumerable<AnswerDto> Answers
     );

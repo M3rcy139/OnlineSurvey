@@ -30,8 +30,8 @@ namespace OnlineSurvey.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -71,12 +71,11 @@ namespace OnlineSurvey.Persistence.Migrations
 
             modelBuilder.Entity("OnlineSurvey.Persistence.Entities.QuestionEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Order")
                         .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("SurveyId")
                         .HasColumnType("uuid");
@@ -104,8 +103,8 @@ namespace OnlineSurvey.Persistence.Migrations
                     b.Property<Guid>("InterviewId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

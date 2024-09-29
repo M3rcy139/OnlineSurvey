@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineSurvey.Application.Interfaces.Repositories;
+using OnlineSurvey.Persistence.Interfaces.Repositories;
 using OnlineSurvey.Persistence.Repositories;
 
 namespace OnlineSurvey.Persistence

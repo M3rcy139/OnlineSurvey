@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineSurvey.Persistence.Entities;
-using OnlineSurvey.Application.Interfaces.Repositories;
+using OnlineSurvey.Persistence.Interfaces.Repositories;
 
 namespace OnlineSurvey.Persistence.Repositories
 {
@@ -12,20 +12,21 @@ namespace OnlineSurvey.Persistence.Repositories
         {
             _context = surveyContext;
         }
-        public async Task<Guid> SaveAnswer(int AnswerId, Guid InterviewId, Guid QuestionId)
+        public async Task<int> SaveAnswer(int AnswerId, Guid InterviewId, int QuestionId)
         {
             var interview = await _context.Interviews
                 .Include(i => i.Survey)
                 .ThenInclude(s => s.Questions)
                 .ThenInclude(q => q.Answers)
-                .FirstOrDefaultAsync(i => i.Id == InterviewId) ?? throw new Exception("Interview not found");
+                .FirstOrDefaultAsync(i => i.Id == InterviewId) 
+                ?? throw new ArgumentException("Interview not found");
 
             var question = interview.Survey.Questions.FirstOrDefault(q => q.Id == QuestionId) 
-                ?? throw new Exception("Question not found");
+                ?? throw new ArgumentException("Question not found");
 
 
             var answerExists = question.Answers.FirstOrDefault(a => a.Id == AnswerId) 
-                ?? throw new Exception("Answer does not belong to the specified question");
+                ?? throw new InvalidOperationException("Answer does not belong to the specified question");
 
             var result = new ResultEntity
             {
@@ -38,12 +39,12 @@ namespace OnlineSurvey.Persistence.Repositories
             await _context.SaveChangesAsync();
 
             var currentQuestionIndex = interview.Survey.Questions
-                .OrderBy(q => q.Order)
+                .OrderBy(q => q.Id)
                 .ToList()
                 .FindIndex(q => q.Id == QuestionId);
 
             var nextQuestion = interview.Survey.Questions
-                .OrderBy(q => q.Order)
+                .OrderBy(q => q.Id)
                 .Skip(currentQuestionIndex + 1)
                 .FirstOrDefault();
 
@@ -51,7 +52,7 @@ namespace OnlineSurvey.Persistence.Repositories
             {
                 interview.CompletedAt = DateTime.UtcNow;
                 await _context.SaveChangesAsync();
-                return Guid.Empty;
+                return 0;
             }
 
             return nextQuestion.Id;

@@ -4,6 +4,6 @@ namespace OnlineSurvey.Application.Interfaces.Repositories
 {
     public interface IQuestionRepository
     {
-        Task<Question> GetQuestion(Guid questionId);
+        Task<Question> GetQuestion(int questionId);
     }
 }
